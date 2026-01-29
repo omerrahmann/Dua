@@ -196,3 +196,64 @@ li, small {
   color: var(--accent);
   border-color: var(--accent);
 }
+
+/* ===== Dark Mode (Manual Toggle) ===== */
+html.dark {
+  --bg: #0B1220;
+  --text: #E5E7EB;
+  --primary: #9FD3B4;
+  --accent: #E0B65A;
+  --border: #243041;
+  --card: #121B2C;
+}
+
+html.dark,
+html.dark body,
+html.dark .page-content,
+html.dark .wrapper,
+html.dark .post-content,
+html.dark .post,
+html.dark .home,
+html.dark .site-header,
+html.dark .site-footer {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+}
+
+html.dark .card {
+  background: var(--card) !important;
+  border-color: var(--border) !important;
+}
+
+html.dark a,
+html.dark a:visited,
+html.dark .site-title,
+html.dark .site-title:visited,
+html.dark .site-nav .page-link,
+html.dark .site-nav .page-link:visited {
+  color: var(--primary) !important;
+}
+
+html.dark a:hover,
+html.dark .site-nav .page-link:hover {
+  color: var(--accent) !important;
+}
+
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background: var(--card) !important;
+  border-color: var(--border) !important;
+  color: var(--text) !important;
+}
+
+html.dark .meta,
+html.dark .ref,
+html.dark small {
+  color: #B6C0CF !important;
+}
+
+html.dark .arabic,
+html.dark .urdu {
+  color: var(--text) !important;
+}

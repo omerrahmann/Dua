@@ -47,6 +47,8 @@ layout: default
 
 <hr />
 
+{{ content }}
+
 <script>
   function getTextById(id) {
     const el = document.getElementById(id);
@@ -99,7 +101,9 @@ layout: default
     const ref = "{{ page.reference | strip_newlines | escape }}";
     if (ref) parts.push("\nReference:\n" + ref);
 
-    parts.push("\nLink:\n" + window.location.href);
+    const canonical = document.querySelector('link[rel="canonical"]');
+    const linkToCopy = canonical ? canonical.href : window.location.href;
+    parts.push("\nLink:\n" + linkToCopy);
 
     return parts.join("\n");
   }
@@ -134,7 +138,9 @@ layout: default
 
     // Copy link
     if (btn.hasAttribute("data-copy-link")) {
-      const ok = await writeClipboard(window.location.href);
+      const canonical = document.querySelector('link[rel="canonical"]');
+      const linkToCopy = canonical ? canonical.href : window.location.href;
+      const ok = await writeClipboard(linkToCopy);
       setTempLabel(btn, ok ? "Link copied!" : "Copy failed", "Copy failed");
       return;
     }
@@ -143,7 +149,8 @@ layout: default
   // Set share links on load
   document.addEventListener("DOMContentLoaded", initShares);
 </script>
-{{ content }}
+
+
 
 
 

@@ -11,22 +11,26 @@ layout: default
 
 {% if page.arabic %}
   <h2>Arabic</h2>
-  <div class="card arabic rtl">{{ page.arabic }}</div>
+  <button class="copy-btn" data-copy-target="arabicText">Copy Arabic</button>
+  <div id="arabicText" class="card arabic rtl">{{ page.arabic }}</div>
 {% endif %}
 
 {% if page.transliteration %}
   <h2>Transliteration</h2>
-  <p>{{ page.transliteration }}</p>
+  <button class="copy-btn" data-copy-target="translitText">Copy Transliteration</button>
+  <p id="translitText">{{ page.transliteration }}</p>
 {% endif %}
 
 {% if page.translation_en %}
   <h2>English</h2>
-  <p>{{ page.translation_en }}</p>
+  <button class="copy-btn" data-copy-target="enText">Copy English</button>
+  <p id="enText">{{ page.translation_en }}</p>
 {% endif %}
 
 {% if page.translation_ur %}
   <h2>Urdu</h2>
-  <div class="urdu rtl">{{ page.translation_ur }}</div>
+  <button class="copy-btn" data-copy-target="urText">Copy Urdu</button>
+  <div id="urText" class="urdu rtl">{{ page.translation_ur }}</div>
 {% endif %}
 
 {% if page.reference %}
@@ -36,5 +40,47 @@ layout: default
 
 <hr />
 
+<script>
+  async function copyFromId(id) {
+    const el = document.getElementById(id);
+    const text = (el.innerText || el.textContent || "").trim();
+    if (!text) return;
+
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch (e) {
+      // Fallback for older browsers
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "absolute";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      return ok;
+    }
+  }
+
+  document.addEventListener("click", async (e) => {
+    const btn = e.target.closest(".copy-btn");
+    if (!btn) return;
+
+    const targetId = btn.getAttribute("data-copy-target");
+    const ok = await copyFromId(targetId);
+
+    const original = btn.textContent;
+    btn.textContent = ok ? "Copied!" : "Copy failed";
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.disabled = false;
+    }, 1200);
+  });
+</script>
+
 {{ content }}
+
 

@@ -129,3 +129,25 @@ li, small {
   .urdu { font-size: 1.15em !important; }
 }
 
+/* For copy buttons */
+.copy-btn {
+  display: inline-block;
+  margin: 6px 0 10px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 0.95em;
+}
+
+.copy-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.copy-btn:disabled {
+  opacity: 0.7;
+  cursor: default;
+}

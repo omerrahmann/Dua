@@ -11,7 +11,37 @@
     <!-- Your custom CSS (must be after Minima main.css) -->
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   </head>
+  <script>
+  (function () {
+    const root = document.documentElement;
+    const toggle = document.getElementById("themeToggle");
 
+    if (!toggle) return;
+
+    const stored = localStorage.getItem("theme");
+
+    // Apply stored or system preference
+    if (stored === "dark") {
+      root.classList.add("dark");
+      toggle.textContent = "☀️";
+    } else if (stored === "light") {
+      root.classList.remove("dark");
+      toggle.textContent = "🌙";
+    } else {
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      if (prefersDark) {
+        root.classList.add("dark");
+        toggle.textContent = "☀️";
+      }
+    }
+
+    toggle.addEventListener("click", () => {
+      const isDark = root.classList.toggle("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+      toggle.textContent = isDark ? "☀️" : "🌙";
+    });
+  })();
+  </script>
   <body>
     {% include header.html %}
     <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">

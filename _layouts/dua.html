@@ -4,6 +4,13 @@ layout: default
 
 <h1>{{ page.title }}</h1>
 
+<div class="dua-actions">
+  <button class="copy-btn" data-copy-all="1">Copy All</button>
+  <a class="share-btn" id="waShare" target="_blank" rel="noopener">WhatsApp</a>
+  <a class="share-btn" id="xShare" target="_blank" rel="noopener">X</a>
+  <button class="copy-btn" data-copy-link="1">Copy Link</button>
+</div>
+
 <p class="meta">
   <strong>Category:</strong> {{ page.category }}
   {% if page.tags %} | <strong>Tags:</strong> {{ page.tags | join: ", " }}{% endif %}
@@ -41,16 +48,16 @@ layout: default
 <hr />
 
 <script>
-  async function copyFromId(id) {
+  function getTextById(id) {
     const el = document.getElementById(id);
-    const text = (el.innerText || el.textContent || "").trim();
-    if (!text) return;
+    return el ? (el.innerText || el.textContent || "").trim() : "";
+  }
 
+  async function writeClipboard(text) {
     try {
       await navigator.clipboard.writeText(text);
       return true;
     } catch (e) {
-      // Fallback for older browsers
       const ta = document.createElement("textarea");
       ta.value = text;
       ta.setAttribute("readonly", "");
@@ -64,23 +71,79 @@ layout: default
     }
   }
 
+  function setTempLabel(el, okText, failText) {
+    const original = el.textContent;
+    el.textContent = okText;
+    el.disabled = true;
+    setTimeout(() => {
+      el.textContent = original;
+      el.disabled = false;
+    }, 1200);
+  }
+
+  function buildCopyAll() {
+    const parts = [];
+    const title = "{{ page.title | escape }}";
+    if (title) parts.push(title);
+
+    const arabic = getTextById("arabicText");
+    const translit = getTextById("translitText");
+    const en = getTextById("enText");
+    const ur = getTextById("urText");
+
+    if (arabic) parts.push("\nArabic:\n" + arabic);
+    if (translit) parts.push("\nTransliteration:\n" + translit);
+    if (en) parts.push("\nEnglish:\n" + en);
+    if (ur) parts.push("\nUrdu:\n" + ur);
+
+    const ref = "{{ page.reference | strip_newlines | escape }}";
+    if (ref) parts.push("\nReference:\n" + ref);
+
+    parts.push("\nLink:\n" + window.location.href);
+
+    return parts.join("\n");
+  }
+
+  function initShares() {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent("{{ page.title | escape }}");
+    const wa = document.getElementById("waShare");
+    const x = document.getElementById("xShare");
+    if (wa) wa.href = `https://wa.me/?text=${text}%0A${url}`;
+    if (x) x.href = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+  }
+
   document.addEventListener("click", async (e) => {
     const btn = e.target.closest(".copy-btn");
     if (!btn) return;
 
+    // Copy specific section
     const targetId = btn.getAttribute("data-copy-target");
-    const ok = await copyFromId(targetId);
+    if (targetId) {
+      const ok = await writeClipboard(getTextById(targetId));
+      setTempLabel(btn, ok ? "Copied!" : "Copy failed", "Copy failed");
+      return;
+    }
 
-    const original = btn.textContent;
-    btn.textContent = ok ? "Copied!" : "Copy failed";
-    btn.disabled = true;
-    setTimeout(() => {
-      btn.textContent = original;
-      btn.disabled = false;
-    }, 1200);
+    // Copy all
+    if (btn.hasAttribute("data-copy-all")) {
+      const ok = await writeClipboard(buildCopyAll());
+      setTempLabel(btn, ok ? "Copied all!" : "Copy failed", "Copy failed");
+      return;
+    }
+
+    // Copy link
+    if (btn.hasAttribute("data-copy-link")) {
+      const ok = await writeClipboard(window.location.href);
+      setTempLabel(btn, ok ? "Link copied!" : "Copy failed", "Copy failed");
+      return;
+    }
   });
-</script>
 
+  // Set share links on load
+  document.addEventListener("DOMContentLoaded", initShares);
+</script>
 {{ content }}
+
 
 

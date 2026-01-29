@@ -19,7 +19,7 @@ title: All Duas
       data-en="{{ dua.translation_en | downcase }}"
       data-ur="{{ dua.translation_ur | downcase }}"
     >
-      <a href="{{ dua.url }}">{{ dua.title }}</a>
+      <a href="{{ dua.url | relative_url }}">{{ dua.title }}</a>
       <small> — {{ dua.category }} | Tags: {{ dua.tags | join: ', ' }}</small>
     </li>
   {% endfor %}
@@ -36,4 +36,5 @@ title: All Duas
       li.style.display = hay.includes(term) ? "" : "none";
     });
   });
+
 </script>

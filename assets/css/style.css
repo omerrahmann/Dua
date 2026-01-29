@@ -57,3 +57,55 @@ h2 {
 p {
   line-height: 1.7;
 }
+
+/* ===== Palette: Calm Masjid (override Minima) ===== */
+:root {
+  --bg: #F7F6F3;
+  --text: #1E1E1E;
+  --primary: #1F6F5B;
+  --accent: #C8A951;
+  --border: #E0DED8;
+  --card: #FFFFFF;
+}
+
+/* Minima wraps content in these */
+html, body {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+}
+
+.page-content, .wrapper, .post-content, .post, .home {
+  background: var(--bg) !important;
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+  color: var(--primary) !important;
+}
+
+/* Links (Minima styles a:visited too) */
+a, a:visited {
+  color: var(--primary) !important;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  color: var(--accent) !important;
+  text-decoration: underline;
+}
+
+/* Your dua card */
+.card {
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+}
+
+/* Meta text */
+.meta, .ref, small {
+  color: #555 !important;
+}
+
+/* Arabic/Urdu emphasis */
+.arabic { color: #0F3D33 !important; }
+.urdu { color: var(--text) !important; }
+

@@ -1,6 +1,7 @@
 title: Dua Directory
-description: Arabic, English, and Urdu duas with references.
 theme: minima
+
+baseurl: "/Dua"   # <-- MUST match your repo name exactly (case-sensitive)
 
 collections:
   duas:

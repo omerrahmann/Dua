@@ -1,0 +1,40 @@
+---
+layout: default
+---
+
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<h1>{{ page.title }}</h1>
+
+<p class="meta">
+  <strong>Category:</strong> {{ page.category }}
+  {% if page.tags %} | <strong>Tags:</strong> {{ page.tags | join: ", " }}{% endif %}
+</p>
+
+{% if page.arabic %}
+  <h2>Arabic</h2>
+  <div class="card arabic rtl">{{ page.arabic }}</div>
+{% endif %}
+
+{% if page.transliteration %}
+  <h2>Transliteration</h2>
+  <p>{{ page.transliteration }}</p>
+{% endif %}
+
+{% if page.translation_en %}
+  <h2>English</h2>
+  <p>{{ page.translation_en }}</p>
+{% endif %}
+
+{% if page.translation_ur %}
+  <h2>Urdu</h2>
+  <div class="urdu rtl">{{ page.translation_ur }}</div>
+{% endif %}
+
+{% if page.reference %}
+  <h2>Reference</h2>
+  <p class="ref">{{ page.reference }}</p>
+{% endif %}
+
+<hr />
+{{ content }}

@@ -1,0 +1,39 @@
+---
+layout: default
+title: All Duas
+---
+
+<h1>All Duas</h1>
+
+<p>
+  <input id="q" placeholder="Search (English / Urdu / tags / category)..." style="width:100%;padding:10px;">
+</p>
+
+<ul id="duaList">
+  {% assign sorted = site.duas | sort: "title" %}
+  {% for dua in sorted %}
+    <li
+      data-title="{{ dua.title | downcase }}"
+      data-tags="{{ dua.tags | join: ' ' | downcase }}"
+      data-category="{{ dua.category | downcase }}"
+      data-en="{{ dua.translation_en | downcase }}"
+      data-ur="{{ dua.translation_ur | downcase }}"
+    >
+      <a href="{{ dua.url }}">{{ dua.title }}</a>
+      <small> — {{ dua.category }} | Tags: {{ dua.tags | join: ', ' }}</small>
+    </li>
+  {% endfor %}
+</ul>
+
+<script>
+  const q = document.getElementById("q");
+  const items = [...document.querySelectorAll("#duaList li")];
+
+  q.addEventListener("input", () => {
+    const term = q.value.trim().toLowerCase();
+    items.forEach(li => {
+      const hay = (li.dataset.title + " " + li.dataset.tags + " " + li.dataset.category + " " + li.dataset.en + " " + li.dataset.ur);
+      li.style.display = hay.includes(term) ? "" : "none";
+    });
+  });
+</script>

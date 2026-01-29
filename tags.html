@@ -1,0 +1,27 @@
+---
+layout: default
+title: Tags
+---
+
+<h1>Tags</h1>
+<p>Click a tag to see all duas under it.</p>
+
+{% assign all_tags = "" | split: "" %}
+{% for dua in site.duas %}
+  {% for t in dua.tags %}
+    {% assign all_tags = all_tags | push: t %}
+  {% endfor %}
+{% endfor %}
+{% assign all_tags = all_tags | uniq | sort %}
+
+{% for tag in all_tags %}
+  <h2 id="{{ tag | slugify }}">{{ tag }}</h2>
+  <ul>
+    {% assign sorted = site.duas | sort: "title" %}
+    {% for dua in sorted %}
+      {% if dua.tags contains tag %}
+        <li><a href="{{ dua.url }}">{{ dua.title }}</a> <small>— {{ dua.category }}</small></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endfor %}

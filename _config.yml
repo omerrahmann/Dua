@@ -1,0 +1,8 @@
+title: Dua Directory
+description: Arabic, English, and Urdu duas with references.
+theme: minima
+
+collections:
+  duas:
+    output: true
+    permalink: /dua/:name/

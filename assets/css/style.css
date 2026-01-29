@@ -113,3 +113,46 @@ a:hover, a:focus {
 .urdu {
   color: var(--text) !important;
 }
+
+/* ===== Make ALL Minima pages match the palette (home, dua pages, list pages) ===== */
+
+/* Header / Footer */
+.site-header, .site-footer {
+  background: var(--bg) !important;
+  border-color: var(--border) !important;
+}
+
+.site-title, .site-title:visited {
+  color: var(--primary) !important;
+}
+
+.site-nav .page-link, .site-nav .page-link:visited {
+  color: var(--primary) !important;
+}
+
+.site-nav .page-link:hover {
+  color: var(--accent) !important;
+}
+
+/* Some pages get white backgrounds from Minima blocks */
+.page-content, .wrapper, .home, .post, .post-content, .page-content .wrapper {
+  background: var(--bg) !important;
+}
+
+/* Inputs (your search box on duas.html) */
+input, textarea, select {
+  background: #FFFFFF !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text) !important;
+  border-radius: 10px;
+}
+
+input::placeholder {
+  color: #6B7280 !important;
+}
+
+/* Lists / small text */
+li, small {
+  color: var(--text) !important;
+}
+

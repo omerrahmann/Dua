@@ -192,11 +192,20 @@ li, small {
   color: var(--primary);
 }
 
+/* Desktop hover */
 .theme-toggle:hover {
   color: var(--accent);
   border-color: var(--accent);
 }
 
+/* ===== Mobile adjustment ===== */
+@media (max-width: 768px) {
+  .theme-toggle {
+    top: auto;
+    bottom: 16px;   /* move it to bottom-right */
+    right: 16px;
+  }
+}
 /* ===== Dark Mode (Manual Toggle) ===== */
 html.dark {
   --bg: #0B1220;
@@ -257,3 +266,4 @@ html.dark .arabic,
 html.dark .urdu {
   color: var(--text) !important;
 }
+

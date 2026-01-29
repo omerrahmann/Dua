@@ -20,8 +20,9 @@ title: Tags
     {% assign sorted = site.duas | sort: "title" %}
     {% for dua in sorted %}
       {% if dua.tags contains tag %}
-        <li><a href="{{ dua.url }}">{{ dua.title }}</a> <small>— {{ dua.category }}</small></li>
+        <li><a href="{{ dua.url | relative_url }}">{{ dua.title }}</a> <small>— {{ dua.category }}</small></li>
       {% endif %}
     {% endfor %}
   </ul>
+
 {% endfor %}

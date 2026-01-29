@@ -151,3 +151,27 @@ li, small {
   opacity: 0.7;
   cursor: default;
 }
+
+.dua-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0 18px;
+}
+
+.share-btn {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--primary) !important;
+  text-decoration: none !important;
+  font-size: 0.95em;
+}
+
+.share-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent) !important;
+}
+

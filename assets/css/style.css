@@ -3,4 +3,57 @@
 .urdu { font-size: 1.2em; line-height: 1.9; }
 .card { padding: 12px; border: 1px solid #ddd; border-radius: 12px; }
 .meta { opacity: 0.9; }
+
 .ref { opacity: 0.95; }
+
+/* ===== Global Colors ===== */
+body {
+  background-color: #F7F6F3;
+  color: #1E1E1E;
+}
+
+/* Headings */
+h1, h2, h3 {
+  color: #1F6F5B;
+}
+
+/* Links */
+a {
+  color: #1F6F5B;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #C8A951;
+  text-decoration: underline;
+}
+
+/* Cards (Arabic blocks) */
+.card {
+  background-color: #FFFFFF;
+  border: 1px solid #E0DED8;
+}
+
+/* Meta info & references */
+.meta, .ref {
+  color: #555;
+}
+
+/* Arabic emphasis */
+.arabic {
+  color: #0F3D33;
+}
+
+/* Urdu text */
+.urdu {
+  color: #1E1E1E;
+}
+
+/* ===== Polish ===== */
+h2 {
+  margin-top: 2rem;
+}
+
+p {
+  line-height: 1.7;
+}
